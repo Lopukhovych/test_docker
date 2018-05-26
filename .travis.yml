@@ -1,10 +1,23 @@
 sudo: required
 services:
   - docker
+env:
+  global:
+    - REGISTRY_USER=testuserqwe
+    - REGISTRY_PASS=testuserqwe
+    - secret: "testuserqwetestuserqwetestuserqwe"
 
 script:
-  - docker build --tag cow_say .
-  - docker run cow_say
+  - docker build --tag testorg34/cow_image .
+  - docker run testorg34/cow_image
 
 after_script:
   - docker images
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+deploy:
+  provider: script
+  script: docker push testorg34/cow_image
+  on:
+    branch: master
