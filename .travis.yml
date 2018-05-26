@@ -6,9 +6,11 @@ env:
     - REGISTRY_USER=testuserqwe
     - REGISTRY_PASS=testuserqwe
     - secret: "testuserqwetestuserqwetestuserqwe"
-
+before_script:
+  - docker pull testorg34/automation || true
+  
 script:
-  - docker build --tag testorg34/automation .
+  - docker build --pull --cache-from testorg34/automation --tag testorg34/automation .
   - docker run testorg34/automation
 
 after_script:
@@ -21,3 +23,4 @@ deploy:
   script: docker push testorg34/automation
   on:
     branch: master
+    
