@@ -8,8 +8,8 @@ env:
     - secret: "testuserqwetestuserqwetestuserqwe"
 
 script:
-  - docker build --tag testorg34/cow_image .
-  - docker run testorg34/cow_image
+  - docker build --tag testorg34/automation .
+  - docker run testorg34/automation
 
 after_script:
   - docker images
@@ -18,6 +18,6 @@ before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
-  script: docker push testorg34/cow_image
+  script: docker push testorg34/automation
   on:
     branch: master
