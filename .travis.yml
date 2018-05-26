@@ -1,0 +1,10 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build --tag cow_say .
+  - docker run cow_say
+
+after_script:
+  - docker images
